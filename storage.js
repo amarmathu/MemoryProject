@@ -12,32 +12,32 @@ const StorageManager = {
      * @param {string} idOrUrl - The file ID or raw URL from customers.js
      * @returns {string} - The resolved direct download/stream URL
      */
-    resolvePhoto: function(idOrUrl) {
-        if (!idOrUrl) return 'images/photo.jpeg'; // Default fallback image
-        
-        if (this.provider === 'gdrive') {
-            const id = this.extractId(idOrUrl);
-            return `https://drive.google.com/uc?export=view&id=${id}`;
-        }
-        
-        return idOrUrl;
-    },
+resolvePhoto: function(idOrUrl) {
+    if (!idOrUrl) return "images/photo.jpeg";
+
+    if (this.provider === "gdrive") {
+        const id = this.extractId(idOrUrl);
+        return `https://drive.usercontent.google.com/download?id=${id}&export=view&authuser=0`;
+    }
+
+    return idOrUrl;
+},
 
     /**
      * Resolves a voice URL based on the provider
      * @param {string} idOrUrl - The file ID or raw URL from customers.js
      * @returns {string} - The resolved direct download/stream URL
      */
-    resolveVoice: function(idOrUrl) {
-        if (!idOrUrl) return '';
-        
-        if (this.provider === 'gdrive') {
-            const id = this.extractId(idOrUrl);
-            return `https://drive.google.com/uc?export=download&id=${id}`;
-        }
-        
-        return idOrUrl;
-    },
+  resolveVoice: function(idOrUrl) {
+    if (!idOrUrl) return "";
+
+    if (this.provider === "gdrive") {
+        const id = this.extractId(idOrUrl);
+        return `https://drive.usercontent.google.com/download?id=${id}&export=download&authuser=0`;
+    }
+
+    return idOrUrl;
+},
 
     /**
      * Helper to safely extract Google Drive file ID from a URL or return it if it's already an ID.
