@@ -1,39 +1,18 @@
 const customers = {
 
-  "001":{
-
-      photo:"images/customer1.jpeg",
-
-      voice:"audio/customer1.mp3",
-
-      title:"Happy Anniversary",
-
-      message:"Every moment with you is a beautiful memory."
-
-  },
-
-  "002":{
-
-      photo:"images/customer2.jpeg",
-
-      voice:"audio/customer2.mp3",
-
-      title:"Happy Birthday",
-
-      message:"Wishing you happiness always."
-
-  },
-
-  "003":{
-
-      photo:"https://drive.google.com/file/d/1InvalidPhotoID12345/view?usp=sharing",
-
-      voice:"https://drive.google.com/file/d/1InvalidVoiceID12345/view?usp=sharing",
-
-      title:"Google Drive Fallback Test",
-
-      message:"This memory is hosted on Google Drive. If files fail to load, you should see fallbacks."
-
-  }
+    "A001": {
+        id: "A001",
+        orderNumber: "ORD-2026-0001",
+        createdAt: "2026-06-27T16:26:50.239Z",
+        updatedAt: "2026-06-27T16:26:50.239Z",
+        status: "Active",
+        customerName: "Akshara",
+        title: "Bharathnatiya Arangetram",
+        message: "Every Moment is Precious",
+        photoId: "1LAfdTH8kB6E9gRG9iR-opIWaJibrx_hn",
+        voiceId: "1yiPiChG2PwyhtZi3AiHadXCdfXXQNFUi",
+        photo: "1LAfdTH8kB6E9gRG9iR-opIWaJibrx_hn",
+        voice: "1yiPiChG2PwyhtZi3AiHadXCdfXXQNFUi"
+    }
 
 };
