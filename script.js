@@ -58,34 +58,41 @@ if (!customer) {
     const resolvedPhotoUrl = StorageManager.resolvePhoto(customer.photo);
     const resolvedVoiceUrl = StorageManager.resolveVoice(customer.voice);
 
+    console.log("Resolved Photo URL:", resolvedPhotoUrl);
+    console.log("Resolved Voice URL:", resolvedVoiceUrl);
+
     if (title) title.innerText = customer.title;
     if (message) message.innerText = customer.message;
 
     // Set Dynamic Background based on resolved photo URL
     document.body.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.20)), url("${resolvedPhotoUrl}")`;
 
-    // 3. Image Load Lifecycle with skeleton loading & fade-in transition
-    if (photo) {
-        const photoWrapper = photo.parentElement;
-        if (photoWrapper) {
-            photoWrapper.classList.add("skeleton");
-        }
-        photo.style.opacity = "0";
-
-        photo.onload = () => {
-            if (photoWrapper) photoWrapper.classList.remove("skeleton");
-            photo.style.opacity = "1";
-        };
-
-photo.onerror = function(e) {
-    console.log("Photo failed:", photo.src);
-    console.log(e);
-
-    if (!photo.dataset.fallbackTriggered) {
-        photo.dataset.fallbackTriggered = "true";
-        photo.src = "images/photo.jpeg";
+// 3. Image Load Lifecycle with skeleton loading & fade-in transition
+if (photo) {
+    const photoWrapper = photo.parentElement;
+    if (photoWrapper) {
+        photoWrapper.classList.add("skeleton");
     }
-};
+    photo.style.opacity = "0";
+
+    photo.onload = () => {
+        if (photoWrapper) photoWrapper.classList.remove("skeleton");
+        photo.style.opacity = "1";
+    };
+
+    photo.onerror = function(e) {
+        console.log("Photo failed:", photo.src);
+        console.log(e);
+
+        if (!photo.dataset.fallbackTriggered) {
+            photo.dataset.fallbackTriggered = "true";
+            photo.src = "images/photo.jpeg";
+        }
+    };
+
+    // IMPORTANT: Load the image AFTER all handlers are attached
+    photo.src = resolvedPhotoUrl;
+}
 
     // 4. Audio Load Lifecycle with spinner & error handling
     if (audio) {
@@ -108,20 +115,29 @@ photo.onerror = function(e) {
             if (play) play.classList.remove("loading");
         };
 
-        audio.onerror = () => {
-            if (play) {
-                play.classList.remove("loading");
-                play.disabled = true;
-                play.innerHTML = "✕";
-                play.style.opacity = "0.5";
-                play.style.cursor = "not-allowed";
-            }
-            if (fullDuration) {
-                fullDuration.innerHTML = "<span class='audio-error-text'>Voice message unavailable</span>";
-            }
-            if (duration) {
-                duration.innerHTML = "--:--";
-            }
+       audio.onerror = function () {
+
+    console.error("Audio failed to load");
+    console.error("Requested URL:", audio.src);
+    console.error(audio.error);
+
+    if (play) {
+        play.classList.remove("loading");
+        play.disabled = true;
+        play.innerHTML = "✕";
+        play.style.opacity = "0.5";
+        play.style.cursor = "not-allowed";
+    }
+
+    if (fullDuration) {
+        fullDuration.innerHTML =
+            "<span class='audio-error-text'>Voice message unavailable</span>";
+    }
+
+    if (duration) {
+        duration.innerHTML = "--:--";
+    }
+};
             console.warn("Audio file failed to load. Playback disabled.");
         };
 
