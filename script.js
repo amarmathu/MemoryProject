@@ -77,19 +77,15 @@ if (!customer) {
             photo.style.opacity = "1";
         };
 
-        photo.onerror = () => {
-            if (photoWrapper) photoWrapper.classList.remove("skeleton");
-            // Prevent infinite loop if fallback image also fails
-            if (!photo.dataset.fallbackTriggered) {
-                photo.dataset.fallbackTriggered = "true";
-                photo.src = "images/photo.jpeg"; // Local default fallback
-            }
-            photo.style.opacity = "1";
-        };
+photo.onerror = function(e) {
+    console.log("Photo failed:", photo.src);
+    console.log(e);
 
-        // Assign source after defining events to prevent race conditions with cache
-        photo.src = resolvedPhotoUrl;
+    if (!photo.dataset.fallbackTriggered) {
+        photo.dataset.fallbackTriggered = "true";
+        photo.src = "images/photo.jpeg";
     }
+};
 
     // 4. Audio Load Lifecycle with spinner & error handling
     if (audio) {
