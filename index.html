@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Memory Gift</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="memoryCard" class="card">
+
+        <h1>❤️ A Special Memory ❤️</h1>
+
+        <div class="photo-wrapper">
+            <img id="photo" class="photo" alt="Memory Photo" loading="lazy">
+        </div>
+
+        <h2 id="title"></h2>
+
+        <p id="message" class="message"></p>
+
+        <div class="player">
+
+            <button id="playButton" class="play-btn">
+                ▶
+            </button>
+
+            <div class="time">
+                <span id="currentTime">00:00</span>
+                /
+                <span id="duration">00:00</span>
+            </div>
+
+        </div>
+
+        <div class="progress-container">
+            <div id="progress"></div>
+        </div>
+
+        <p class="duration">
+            Duration : <span id="fullDuration">00:00</span>
+        </p>
+
+        <footer>
+            Made with ❤️ by Memory Frame Studio
+        </footer>
+
+    </div>
+
+    <!-- Clean Error Card for invalid Customer IDs -->
+    <div id="errorCard" class="card" style="display: none;">
+
+        <div class="error-icon">🔍</div>
+
+        <h2>Memory Not Found</h2>
+
+        <p class="message">This QR code may be invalid.</p>
+
+        <footer>
+            Made with ❤️ by Memory Frame Studio
+        </footer>
+
+    </div>
+
+</div>
+
+<audio id="voicePlayer" preload="metadata"></audio>
+
+<script src="customers.js"></script>
+<script src="storage.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
